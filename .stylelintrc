@@ -1,0 +1,46 @@
+{
+  "extends": "stylelint-config-airbnb",
+  "ignoreFiles": ["**/*.js","**/*.jsx","**/*.ts","**/*.tsx","**/*.html"],
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-order"
+  ],
+  "rules" :{
+    "string-quotes": "single",
+    "number-leading-zero": "always",
+    "comment-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "first-nested"
+        ]
+      }
+    ],
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "ignore": [
+          "first-nested",
+          "after-comment"
+        ]
+      }
+    ],
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "ignore": [
+          "first-nested",
+          "after-comment"
+        ],
+        "ignoreAtRules": [
+          "import",
+          "include"
+        ]
+      }
+    ],
+    "order/order": [
+			"custom-properties",
+			"declarations"
+		],
+  }
+}
