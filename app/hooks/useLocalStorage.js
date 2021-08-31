@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
@@ -13,17 +13,20 @@ const useLocalStorage = (key, initialValue) => {
     }
   });
 
-  const setValue = (value) => {
-    try {
-      // Check if value passed in hook is function. Otherwise just store value.
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const setValue = useCallback(
+    (value) => {
+      try {
+        // Check if value passed in hook is function. Otherwise just store value.
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [key, storedValue],
+  );
 
   return [storedValue, setValue];
 };

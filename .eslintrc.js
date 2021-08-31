@@ -4,6 +4,7 @@ module.exports = {
     es2020: true,
   },
   extends: ['plugin:react/recommended', 'airbnb', 'prettier'], // prettier must be last!
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
