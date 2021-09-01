@@ -60,20 +60,24 @@ const MoviesNowPlaying = () => {
         ) : (
           hasMovies && (
             <div className="grid grid-cols-3 gap-10">
-              {movies.map((movie) => (
-                <Card
-                  key={movie.id}
-                  image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
-                  id={movie.id}
-                  title={movie.title}
-                  overview={movie.overview}
-                  isAdult={movie.adult}
-                  date={movie.release_date}
-                  genres={genres
-                    .filter((genre) => movie.genre_ids.includes(genre.id))
-                    .splice(0, 3)}
-                />
-              ))}
+              {movies.map(
+                (movie) =>
+                  console.log(movie) || (
+                    <Card
+                      key={movie.id}
+                      image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
+                      id={movie.id}
+                      title={movie.title}
+                      overview={movie.overview}
+                      isAdult={movie.adult}
+                      voteAverage={movie.vote_average}
+                      date={movie.release_date}
+                      genres={genres
+                        .filter((genre) => movie.genre_ids.includes(genre.id))
+                        .splice(0, 3)}
+                    />
+                  ),
+              )}
             </div>
           )
         )}
