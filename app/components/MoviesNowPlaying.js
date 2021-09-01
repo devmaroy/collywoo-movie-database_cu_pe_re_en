@@ -58,6 +58,7 @@ const MoviesNowPlaying = () => {
         {isLoading ? (
           <Loading />
         ) : (
+          !isError &&
           hasMovies && (
             <div className="grid grid-cols-3 gap-10">
               {movies.map((movie) => (
