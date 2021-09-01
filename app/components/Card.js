@@ -12,8 +12,11 @@ const Card = ({
   voteAverage,
   genres,
 }) => (
-  <a href={`/movie/${slugify(title, { lower: true })}`}>
-    <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
+  <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
+    <div
+      href={`/movie/${slugify(title, { lower: true })}`}
+      className="flex flex-col h-full"
+    >
       <div
         style={{ backgroundImage: `url(${image})` }}
         className="w-full h-96 bg-cover rounded-md rounded-b-none"
@@ -27,7 +30,7 @@ const Card = ({
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex-1 flex flex-col">
         <div className="flex items-center justify-between text-primary-400 text-sm mb-6">
           <span className="flex">
             <svg
@@ -45,15 +48,18 @@ const Card = ({
               />
             </svg>
 
-            {dateFormat(date, 'mmmm dS yyyy')}
+            <span title="Release date">{dateFormat(date, 'mmmm dS yyyy')}</span>
           </span>
 
-          <span className="bg-yellow-400 p-2 font-bold text-primary-900 rounded-md uppercase">
+          <span
+            className="bg-yellow-400 p-2 font-bold text-primary-900 rounded-md uppercase"
+            title="Average votes"
+          >
             {voteAverage.toFixed(1)}
           </span>
         </div>
         <h3 className="font-bold text-xl text-white mb-2">{title}</h3>
-        <p className="m-0 text-primary-400">
+        <p className="m-0 text-primary-400 flex-grow">
           {overview
             ? `${overview.split(' ').splice(0, 12).join(' ')} ...`
             : 'We are working on a description for the movie.'}
@@ -73,7 +79,7 @@ const Card = ({
         )}
       </div>
     </div>
-  </a>
+  </div>
 );
 
 Card.propTypes = {
