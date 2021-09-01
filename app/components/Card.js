@@ -1,8 +1,17 @@
 import React from 'react';
 import slugify from 'slugify';
+import dateFormat from 'dateformat';
 import { number, string, bool, arrayOf, shape } from 'prop-types';
 
-const Card = ({ image, title, overview, date, isAdult, genres }) => (
+const Card = ({
+  image,
+  title,
+  overview,
+  date,
+  isAdult,
+  voteAverage,
+  genres,
+}) => (
   <a href={`/movie/${slugify(title, { lower: true })}`}>
     <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
       <div
@@ -15,12 +24,34 @@ const Card = ({ image, title, overview, date, isAdult, genres }) => (
               adult
             </span>
           )}
-
-          {date}
         </div>
       </div>
 
       <div className="p-6">
+        <div className="flex items-center justify-between text-primary-400 text-sm mb-6">
+          <span className="flex">
+            <svg
+              className="w-5 h-5 mr-2 text-primaryOff-900"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+
+            {dateFormat(date, 'mmmm dS yyyy')}
+          </span>
+
+          <span className="bg-yellow-400 p-2 font-bold text-primary-900 rounded-md uppercase">
+            {voteAverage.toFixed(1)}
+          </span>
+        </div>
         <h3 className="font-bold text-xl text-white mb-2">{title}</h3>
         <p className="m-0 text-primary-400">
           {overview
@@ -33,7 +64,7 @@ const Card = ({ image, title, overview, date, isAdult, genres }) => (
             {genres.map(({ id, name }) => (
               <span
                 key={id}
-                className="mt-2 mr-2 bg-blue-900 p-2 inline-block font-bold text-white text-xs absoldute todp-4 lefdt-4 rounded-md uppercase"
+                className="mt-2 mr-2 bg-blue-900 p-2 inline-block font-bold text-white text-xs rounded-md uppercase"
               >
                 {name}
               </span>
@@ -50,6 +81,7 @@ Card.propTypes = {
   title: string.isRequired,
   overview: string,
   date: string.isRequired,
+  voteAverage: number.isRequired,
   isAdult: bool,
   genres: arrayOf(shape({ id: number.isRequired, name: string.isRequired })),
 };
