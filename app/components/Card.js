@@ -13,7 +13,7 @@ const Card = ({
   genres,
 }) => (
   <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
-    <div
+    <a
       href={`/movie/${slugify(title, { lower: true })}`}
       className="flex flex-col h-full"
     >
@@ -21,7 +21,7 @@ const Card = ({
         style={{ backgroundImage: `url(${image})` }}
         className="w-full h-96 bg-cover rounded-md rounded-b-none"
       >
-        <div className="bg-primary-900 bg-opacity-40 h-full">
+        <div className="bg-primary-900 bg-opacity-30 h-full">
           {isAdult && (
             <span className="bg-danger p-2 inline-block font-bold text-white text-xs absolute top-4 right-4 rounded-md uppercase">
               adult
@@ -61,7 +61,7 @@ const Card = ({
         <h3 className="font-bold text-xl text-white mb-2">{title}</h3>
         <p className="m-0 text-primary-400 flex-grow">
           {overview
-            ? `${overview.split(' ').splice(0, 12).join(' ')} ...`
+            ? `${overview.substring(0, 72)} ...`
             : 'We are working on a description for the movie.'}
         </p>
 
@@ -78,7 +78,7 @@ const Card = ({
           </div>
         )}
       </div>
-    </div>
+    </a>
   </div>
 );
 

@@ -48,7 +48,7 @@ const MoviesNowPlaying = () => {
   return (
     <Layout>
       <>
-        <h1 className="font-sans font-bold text-primaryOff-900 text-center text-5xl mb-6 border-white">
+        <h1 className="font-sans font-bold text-primaryOff-900 text-center text-3xl md:text-4xl lg:text-5xl mb-6 border-white">
           Collywoo Movie Database
         </h1>
         <div className="border-primary-600 border-b mb-16 rounded-full" />
@@ -60,7 +60,7 @@ const MoviesNowPlaying = () => {
         ) : (
           !isError &&
           hasMovies && (
-            <div className="grid grid-cols-3 gap-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {movies.map((movie) => (
                 <Card
                   key={movie.id}
