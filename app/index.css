@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  background: #3c434f;
+}
+
+.separator-pseudo:not(:last-child)::after {
+  content: '|';
+  margin: 0.5rem;
+}
