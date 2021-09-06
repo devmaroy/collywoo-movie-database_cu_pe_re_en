@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Layout from './Layout';
-import Loading from './Loading';
-import Card from './Card';
-import useLocalStorage from '../hooks/useLocalStorage';
+import slugify from 'slugify';
+import Layout from '../layout/Layout';
+import Loading from '../common/Loading';
+import Card from '../common/Card';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const MoviesNowPlaying = () => {
   const [movies, setMovies] = useState([]);
@@ -15,9 +16,8 @@ const MoviesNowPlaying = () => {
 
   useEffect(() => {
     try {
-      setIsLoading(true);
-
       const fetchData = async () => {
+        setIsLoading(true);
         const genresExist = genres && genres.length > 0;
 
         // Check if we have genres
@@ -48,11 +48,6 @@ const MoviesNowPlaying = () => {
   return (
     <Layout>
       <>
-        <h1 className="font-sans font-bold text-primaryOff-900 text-center text-3xl md:text-4xl lg:text-5xl mb-6 border-white">
-          Collywoo Movie Database
-        </h1>
-        <div className="border-primary-600 border-b mb-16 rounded-full" />
-
         {isError && <p>Something went wrong...</p>}
 
         {isLoading ? (
@@ -66,6 +61,10 @@ const MoviesNowPlaying = () => {
                   key={movie.id}
                   image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
                   id={movie.id}
+                  to={`/movies/${movie.id}/${slugify(movie.title, {
+                    lower: true,
+                    strict: true,
+                  })}`}
                   title={movie.title}
                   overview={movie.overview}
                   isAdult={movie.adult}

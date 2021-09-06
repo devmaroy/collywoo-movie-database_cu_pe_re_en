@@ -1,9 +1,10 @@
 import React from 'react';
-import slugify from 'slugify';
+import { Link } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import { number, string, bool, arrayOf, shape } from 'prop-types';
 
 const Card = ({
+  to = '/',
   image,
   title,
   overview,
@@ -13,10 +14,7 @@ const Card = ({
   genres,
 }) => (
   <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
-    <a
-      href={`/movie/${slugify(title, { lower: true })}`}
-      className="flex flex-col h-full"
-    >
+    <Link to={to} className="flex flex-col h-full">
       <div
         style={{ backgroundImage: `url(${image})` }}
         className="w-full h-96 bg-cover rounded-md rounded-b-none"
@@ -66,23 +64,24 @@ const Card = ({
         </p>
 
         {genres && genres.length !== 0 && (
-          <div className="mt-6">
-            {genres.map(({ id, name }) => (
-              <span
-                key={id}
+          <ul className="mt-6">
+            {genres.map(({ id: genId, name: genName }) => (
+              <li
+                key={genId}
                 className="mt-2 mr-2 bg-blue-900 p-2 inline-block font-bold text-white text-xs rounded-md uppercase"
               >
-                {name}
-              </span>
+                {genName}
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
-    </a>
+    </Link>
   </div>
 );
 
 Card.propTypes = {
+  to: string,
   image: string.isRequired,
   title: string.isRequired,
   overview: string,

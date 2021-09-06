@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="bold mt-16 text-white text-center">
+  <footer className="bold pt-16 pb-16 mt-auto text-white text-center">
     Made by{' '}
     <a
       href="https://devmaroy.com/"
