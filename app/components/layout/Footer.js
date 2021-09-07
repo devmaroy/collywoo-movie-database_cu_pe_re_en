@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="bold pt-16 pb-16 mt-auto text-white text-center">
+  <footer className="font-bold pt-16 pb-16 mt-auto text-white text-center">
     Made by{' '}
     <a
       href="https://devmaroy.com/"
-      className="bold text-primaryOff-900 hover:text-primaryOff-800 transition"
+      className="font-bold text-primaryOff-900 hover:text-primaryOff-800 transition"
     >
       devmaroy
     </a>

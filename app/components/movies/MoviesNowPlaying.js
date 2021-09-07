@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import slugify from 'slugify';
 import Layout from '../layout/Layout';
-import Loading from '../common/Loading';
+import LoadingSpinner from '../common/LoadingSpinner';
 import Card from '../common/Card';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
@@ -51,7 +51,7 @@ const MoviesNowPlaying = () => {
         {isError && <p>Something went wrong...</p>}
 
         {isLoading ? (
-          <Loading />
+          <LoadingSpinner />
         ) : (
           !isError &&
           hasMovies && (
