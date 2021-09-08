@@ -186,7 +186,7 @@ MoviePreview.propTypes = {
     budget: number,
     genres: arrayOf(shape({ id: number, name: string })),
     homepage: string,
-    imdb_id: number,
+    imdb_id: string,
     overview: string,
     poster_path: string.isRequired,
     release_date: string,
