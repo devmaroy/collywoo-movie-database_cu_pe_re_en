@@ -34,6 +34,8 @@ const MoviesNowPlaying = () => {
         const moviesResponse = await fetch(nowPlayingUrl);
         const { results: moviesData } = await moviesResponse.json();
 
+        console.log(moviesData[0]);
+
         // Update state
         setIsLoading(false);
         setIsError(false);
@@ -72,6 +74,7 @@ const MoviesNowPlaying = () => {
                   <Card
                     key={movie.id}
                     image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
+                    imageLowRes={`${process.env.API_IMAGE_LOWRES_URL}${movie.poster_path}`}
                     id={movie.id}
                     to={`/movies/${movie.id}/${slugify(movie.title, {
                       lower: true,

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import dateFormat from 'dateformat';
 import { number, string, bool, arrayOf, shape } from 'prop-types';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Card = ({
   to = '/',
   image,
+  imageLowRes,
   title,
   overview,
   date,
@@ -15,11 +18,18 @@ const Card = ({
 }) => (
   <div className="relative bg-primary-800 rounded-md transition-all duration-300 ease-in-out transform hover:-translate-y-2">
     <Link to={to} className="flex flex-col h-full">
-      <div
-        style={{ backgroundImage: `url(${image})` }}
-        className="w-full h-96 bg-cover rounded-md rounded-b-none"
-      >
-        <div className="bg-primary-900 bg-opacity-30 h-full">
+      <div className="relative">
+        <LazyLoadImage
+          alt={title}
+          src={image}
+          width="100%"
+          height="24rem"
+          placeholderSrc={imageLowRes}
+          wrapperClassName="bg-center-cover rounded-md rounded-b-none"
+          className="w-full h-96 object-cover rounded-md rounded-b-none"
+        />
+
+        <div className="absolute top-0 bottom-0 left-0 right-0 bg-primary-900 bg-opacity-30 h-full">
           {isAdult && (
             <span className="bg-danger p-2 inline-block font-bold text-white text-xs absolute top-4 right-4 rounded-md uppercase">
               adult
@@ -83,6 +93,7 @@ const Card = ({
 Card.propTypes = {
   to: string,
   image: string.isRequired,
+  imageLowRes: string.isRequired,
   title: string.isRequired,
   overview: string,
   date: string.isRequired,

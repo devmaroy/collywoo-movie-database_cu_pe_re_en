@@ -10,3 +10,8 @@
   content: '|';
   margin: 0.5rem;
 }
+
+.bg-center-cover {
+  background-size: cover !important;
+  background-position: 50% 50% !important;
+}
