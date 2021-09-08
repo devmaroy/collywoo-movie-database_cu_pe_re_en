@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import slugify from 'slugify';
 import Layout from '../layout/Layout';
 import LoadingSpinner from '../common/LoadingSpinner';
@@ -6,11 +6,13 @@ import Card from '../common/Card';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const MoviesNowPlaying = () => {
+  const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useLocalStorage('genres', []);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const nowPlayingUrl = `${process.env.API_URL}/movie/now_playing?api_key=${process.env.API_KEY}`;
+  const [position, setPosition] = useState(window.pageYOffset);
+  const nowPlayingUrl = `${process.env.API_URL}/movie/now_playing?page=${page}&api_key=${process.env.API_KEY}`;
   const genresUrl = `${process.env.API_URL}/genre/movie/list?api_key=${process.env.API_KEY}`;
   const hasMovies = movies && movies.length !== 0;
 
@@ -35,7 +37,7 @@ const MoviesNowPlaying = () => {
         // Update state
         setIsLoading(false);
         setIsError(false);
-        setMovies(moviesData);
+        setMovies((currentMoviesData) => [...currentMoviesData, ...moviesData]);
       };
 
       fetchData();
@@ -44,6 +46,15 @@ const MoviesNowPlaying = () => {
       setIsError(true);
     }
   }, [genres, genresUrl, nowPlayingUrl, setGenres]);
+
+  useLayoutEffect(() => {
+    window.scroll({ top: position });
+  }, [movies, position]);
+
+  const loadMore = () => {
+    setPosition(window.pageYOffset);
+    setPage((currentPage) => currentPage + 1);
+  };
 
   return (
     <Layout>
@@ -55,27 +66,41 @@ const MoviesNowPlaying = () => {
         ) : (
           !isError &&
           hasMovies && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {movies.map((movie) => (
-                <Card
-                  key={movie.id}
-                  image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
-                  id={movie.id}
-                  to={`/movies/${movie.id}/${slugify(movie.title, {
-                    lower: true,
-                    strict: true,
-                  })}`}
-                  title={movie.title}
-                  overview={movie.overview}
-                  isAdult={movie.adult}
-                  voteAverage={movie.vote_average}
-                  date={movie.release_date}
-                  genres={genres
-                    .filter((genre) => movie.genre_ids.includes(genre.id))
-                    .splice(0, 3)}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {movies.map((movie) => (
+                  <Card
+                    key={movie.id}
+                    image={`${process.env.API_IMAGE_URL}${movie.poster_path}`}
+                    id={movie.id}
+                    to={`/movies/${movie.id}/${slugify(movie.title, {
+                      lower: true,
+                      strict: true,
+                    })}`}
+                    title={movie.title}
+                    overview={movie.overview}
+                    isAdult={movie.adult}
+                    voteAverage={movie.vote_average}
+                    date={movie.release_date}
+                    genres={genres
+                      .filter((genre) => movie.genre_ids.includes(genre.id))
+                      .splice(0, 3)}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-16 text-center">
+                <button
+                  type="button"
+                  className="mt-2 mr-2 bg-blue-900 hover:bg-blue-800 
+                  transition pl-6 pr-6 pb-4 pt-4 inline-block font-bold 
+                  text-white text-xs rounded-md uppercase"
+                  onClick={loadMore}
+                >
+                  Load More
+                </button>
+              </div>
+            </>
           )
         )}
       </>
