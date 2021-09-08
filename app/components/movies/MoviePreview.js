@@ -32,20 +32,20 @@ const MoviePreview = ({ movie }) => {
         Back to home
       </Link>
 
-      <div className="grid grid-cols-2 gap-24">
+      <div className="grid md:grid-cols-2 md:gap-14 lg:gap-24">
         <a href={movie.homepage}>
           <div
             style={{
               backgroundImage: `url(${process.env.API_IMAGE_URL}${movie.poster_path})`,
             }}
-            className="w-full h-96 bg-cover rounded-md"
+            className="w-full h-96 bg-cover rounded-md mb-10 md:mb-0"
           >
             <div className="bg-primary-900 bg-opacity-30 h-full" />
           </div>
         </a>
 
         <div>
-          <h2 className="flex items-center text-5xl font-bold text-white mb-1">
+          <h2 className="flex items-center text-4xl lg:text-5xl font-bold text-white mb-1">
             {movie.title}{' '}
             {movie.adult && (
               <span className="bg-danger ml-4 p-2 inline-block font-bold text-white text-xs rounded-md uppercase">
@@ -104,10 +104,10 @@ const MoviePreview = ({ movie }) => {
         </div>
       </div>
       <div className="mt-20">
-        <ul className="flex items-center">
+        <ul className="flex flex-wrap items-center">
           {movie.status && (
-            <li className="mr-6 text-center flex-1">
-              <h3 className="text-3xl updpercase font-bold text-primary-100 mb-4">
+            <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
+              <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
                 Status
               </h3>
               <span className="text-primaryOff-900 font-bold">
@@ -117,9 +117,9 @@ const MoviePreview = ({ movie }) => {
           )}
 
           {movie.release_date && (
-            <li className="mr-6 text-center flex-1">
-              <h3 className="text-3xl updpercase font-bold text-primary-100 mb-4">
-                Release Date
+            <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
+              <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
+                Released
               </h3>
               <span className="text-primaryOff-900 font-bold">
                 {dateFormat(movie.release_date, 'mmmm dS yyyy')}
@@ -128,8 +128,8 @@ const MoviePreview = ({ movie }) => {
           )}
 
           {movie.budget && (
-            <li className="mr-6 text-center flex-1">
-              <h3 className="text-3xl updpercase font-bold text-primary-100 mb-4">
+            <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
+              <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
                 Budget
               </h3>
               <span className="text-primaryOff-900 font-bold">
@@ -139,8 +139,8 @@ const MoviePreview = ({ movie }) => {
           )}
 
           {movie.vote_average && (
-            <li className="mr-6 text-center flex-1">
-              <h3 className="text-3xl updpercase font-bold text-primary-100 mb-4">
+            <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
+              <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
                 Votes
               </h3>
 
@@ -154,8 +154,8 @@ const MoviePreview = ({ movie }) => {
           )}
 
           {hasSpokenLanguages && (
-            <li className="mr-6 text-center flex-1">
-              <h3 className="text-3xl updpercase font-bold text-primary-100 mb-4">
+            <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
+              <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
                 Languages
               </h3>
               <span className="text-primaryOff-900 font-bold">
