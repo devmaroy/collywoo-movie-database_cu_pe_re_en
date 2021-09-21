@@ -115,7 +115,6 @@ const MoviePreview = ({ movie }) => {
               </span>
             </li>
           )}
-
           {movie.release_date && (
             <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
               <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
@@ -126,8 +125,9 @@ const MoviePreview = ({ movie }) => {
               </span>
             </li>
           )}
-
-          {movie.budget && (
+          {/* It can be zero so it will go through this condition and render number.
+          We don't want it, so we need to either return null or use Boolean */}
+          {Boolean(movie.budget) && (
             <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
               <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
                 Budget
@@ -137,7 +137,6 @@ const MoviePreview = ({ movie }) => {
               </span>
             </li>
           )}
-
           {movie.vote_average && (
             <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
               <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
@@ -152,7 +151,6 @@ const MoviePreview = ({ movie }) => {
               </span>
             </li>
           )}
-
           {hasSpokenLanguages && (
             <li className="mb-6 md:mb-0 mr-6 md:text-center md:flex-1">
               <h3 className="text-2xl lg:text-3xl updpercase font-bold text-primary-100 mb-4">
