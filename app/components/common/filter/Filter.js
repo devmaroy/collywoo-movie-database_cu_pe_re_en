@@ -37,7 +37,7 @@ const Filter = ({ data, options, defaultOption, children }) => {
 
   return (
     <div className="filter">
-      <div className="flex items-center justify-end mb-10 w-full">
+      <div className="flex items-center md:justify-end mb-10 w-full">
         <FilterSearch search={searchFilter} changeSearch={changeFilterSearch} />
         <FilterOptions
           options={options}
