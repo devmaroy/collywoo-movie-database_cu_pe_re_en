@@ -14,7 +14,7 @@ const FilterOptions = ({
   };
 
   return (
-    <label htmlFor="options" className="text-primary-400">
+    <label htmlFor="options" className="text-primary-400 font-medium">
       Filter by category
       <select
         id="options"

@@ -8,7 +8,7 @@ const FilterSearch = ({ search, changeSearch }) => {
   };
 
   return (
-    <label htmlFor="search" className="text-primary-400">
+    <label htmlFor="search" className="text-primary-400 font-medium">
       Search
       <input
         id="search"
