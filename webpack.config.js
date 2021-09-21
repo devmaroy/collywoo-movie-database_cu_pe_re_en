@@ -27,7 +27,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'app/index.html' }),
+    new HtmlWebpackPlugin({
+      template: 'app/index.html',
+      favicon: './app/images/favicon.png',
+    }),
     new Dotenv(),
   ],
   mode: 'development',
