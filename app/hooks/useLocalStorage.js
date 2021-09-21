@@ -20,12 +20,12 @@ const useLocalStorage = (key, initialValue) => {
         const valueToStore =
           value instanceof Function ? value(storedValue) : value;
         setStoredValue(valueToStore);
-        localStorage.setItem(key, JSON.stringify(valueToStore));
+        localStorage.setItem(key, JSON.stringify(valueToStore || initialValue));
       } catch (error) {
         console.error(error);
       }
     },
-    [key, storedValue],
+    [key, storedValue, initialValue],
   );
 
   return [storedValue, setValue];

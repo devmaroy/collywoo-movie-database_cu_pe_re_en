@@ -41,7 +41,7 @@ const Movie = () => {
 
   return (
     <Layout>
-      {isError && <p>Something went wrong...</p>}
+      {isError && <p>Sorry, something went wrong...</p>}
 
       {isLoading ? (
         <LoadingSpinner />
