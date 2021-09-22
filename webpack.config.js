@@ -31,7 +31,7 @@ module.exports = {
       template: 'app/index.html',
       favicon: './app/images/favicon.png',
     }),
-    new Dotenv(),
+    new Dotenv({ systemvars: true, silent: true, allowEmptyValues: true }),
   ],
   mode: 'development',
   devServer: {
