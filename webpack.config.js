@@ -1,6 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+
+const { NODE_ENV } = process.env;
+const inProduction = NODE_ENV === 'production';
 
 module.exports = {
   entry: './app/index.js',
@@ -18,7 +23,11 @@ module.exports = {
       },
       {
         test: /\.(css)$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [
+          inProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -26,14 +35,24 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers
+      // (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       favicon: './app/images/favicon.png',
     }),
+    inProduction && new MiniCssExtractPlugin({ filename: 'bundle.min.css' }),
     new Dotenv({ systemvars: true, silent: true, allowEmptyValues: true }),
   ],
-  mode: 'development',
+  mode: inProduction ? 'production' : 'development',
+  devtool: inProduction ? 'source-map' : 'inline-source-map',
   devServer: {
     historyApiFallback: true,
   },

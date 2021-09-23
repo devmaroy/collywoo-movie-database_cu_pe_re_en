@@ -68,6 +68,7 @@ A quick look at the top-level files and directories you'll see in my project.
     ├── .stylelintrc
     ├── package.json
     ├── package-lock.json
+    ├── postcss.config.js
     ├── README.md
     ├── screenshot.png
     ├── tailwind-default.config.js
@@ -114,27 +115,29 @@ A quick look at the top-level files and directories you'll see in my project.
     automatically generated file based on the exact versions of npm dependencies
     that were installed for project. **(You won’t change this file directly).**
 
-14. **`README.md`**: A text file containing useful reference information about
+14. **`postcss.config.js`**: A config file for PostCSS.
+    
+15. **`README.md`**: A text file containing useful reference information about
     project.
 
-15. **`screenshot.png`**: Screenshot of the final website.
+16. **`screenshot.png`**: Screenshot of the final website.
 
-16. **`tailwind-default.config.js`**: Original Tailwind settings.
+17. **`tailwind-default.config.js`**: Original Tailwind settings.
 
-17. **`tailwind.config.js`**: By default, Tailwind will look for an optional 
+18. **`tailwind.config.js`**: By default, Tailwind will look for an optional 
     tailwind.config.js file at the root of your project where you can define 
     any customizations. Make your custom modifications here.
     See tailwind-default.config.js for more info and inspiration.
 
-18. **`webpack.config.js`**: A configuration file in Webpack is basically 
+19. **`webpack.config.js`**: A configuration file in Webpack is basically 
     a common.js module. The config file is a place to put all of your 
     configuration, loaders and other specific information relating to your build.
 
-19. **`yarn-error.log`**: The whole point of it is that you read the log to find
+20. **`yarn-error.log`**: The whole point of it is that you read the log to find
     out what went wrong, and if you've not had any errors, it might not even
     exist at all.
 
-20. **`yarn.lock`**: There is an identifier for every dependency and sub
+21. **`yarn.lock`**: There is an identifier for every dependency and sub
     dependency that is used for a project.
 
 <br>
