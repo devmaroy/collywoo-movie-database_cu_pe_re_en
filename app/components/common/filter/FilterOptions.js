@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, string, func, arrayOf, shape } from 'prop-types';
+import { number, string, func, arrayOf, shape, oneOfType } from 'prop-types';
 import selectIcon from '../../../images/select-arrow.svg';
 
 const FilterOptions = ({
@@ -46,7 +46,7 @@ FilterOptions.propTypes = {
       name: string.isRequired,
     }),
   ).isRequired,
-  selectedOption: string.isRequired,
+  selectedOption: oneOfType([string, number]),
   defaultOption: string.isRequired,
   changeOption: func.isRequired,
 };

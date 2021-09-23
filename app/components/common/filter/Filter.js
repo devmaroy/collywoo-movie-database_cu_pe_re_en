@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { number, string, arrayOf, shape, func } from 'prop-types';
 import FilterSearch from './FilterSearch';
 import FilterOptions from './FilterOptions';
+import FilterReset from './FilterReset';
 
 const Filter = ({ data, options, defaultOption, children }) => {
   const defaultOptionWord = defaultOption.toLowerCase();
@@ -45,6 +46,14 @@ const Filter = ({ data, options, defaultOption, children }) => {
           defaultOption={defaultOption}
           changeOption={changeFilterOption}
         />
+
+        {filtered && (
+          <FilterReset
+            changeSearch={changeFilterSearch}
+            changeOption={changeFilterOption}
+            defaultOption={defaultOption}
+          />
+        )}
       </div>
 
       {children(filteredData, filtered)}
