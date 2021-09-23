@@ -48,9 +48,12 @@ module.exports = {
       template: 'app/index.html',
       favicon: './app/images/favicon.png',
     }),
-    inProduction && new MiniCssExtractPlugin({ filename: 'bundle.min.css' }),
     new Dotenv({ systemvars: true, silent: true, allowEmptyValues: true }),
-  ],
+  ].concat(
+    inProduction
+      ? [new MiniCssExtractPlugin({ filename: 'bundle.min.css' })]
+      : [],
+  ),
   mode: inProduction ? 'production' : 'development',
   devtool: inProduction ? 'source-map' : 'inline-source-map',
   devServer: {
