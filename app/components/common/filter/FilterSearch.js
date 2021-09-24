@@ -16,7 +16,7 @@ const FilterSearch = ({ search, changeSearch }) => {
         placeholder="Search anything..."
         value={search}
         onChange={handleChange}
-        className="block bg-primary-900 outline-none mt-3 pl-4 pt-3 pb-3 w-60 mr-6 rounded-md border border-primary-500 placeholder-primary-400 text-sm"
+        className="block bg-primary-900 outline-none mt-3 pl-4 pt-3 pb-3 w-60 mr-6 rounded-md border border-primary-500 placeholder-primary-400 text-white text-sm"
       />
     </label>
   );
